@@ -1,5 +1,6 @@
 import com.google.common.collect.Ordering;
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
 
@@ -14,6 +15,10 @@ public class HomepageSausedemo {
     private static final String filterPriceLowToHigh = "Price (low to high)";
     private static final By findedItemsNames = By.className("inventory_item_name");
     private static final By findedItemsPrices = By.className("inventory_item_price");
+    private static final By buttonAddSauceLabsBackpack = By.cssSelector("#inventory_container > div > div:nth-child(1) > div.pricebar > button");
+    private static final By buttonAddSauceLabsBoltTShirt = By.cssSelector("#inventory_container > div > div:nth-child(3) > div.pricebar > button");
+    private static final By buttonGoToCart = By.cssSelector("#shopping_cart_container > a > svg");
+
 
     public void selectByVisibleTextAtoZ() {
         Select select = new Select(InitDriver.webDriver.findElement(buttonSort));
@@ -79,6 +84,20 @@ public class HomepageSausedemo {
         return sorted;
     }
 
+    public void addSauceLabsBackpack(){
+        InitDriver.webDriver.findElement(buttonAddSauceLabsBackpack).click();
+    }
+
+    public void addSauceLabsBoltTShirt(){
+        InitDriver.webDriver.findElement(buttonAddSauceLabsBoltTShirt).click();
+    }
+
+    public void pressButtonCart(){
+        WebElement elem = InitDriver.webDriver.findElement(buttonGoToCart);
+        String js = "arguments[0].style.height='auto'; arguments[0].style.visibility='visible';";
+        ((JavascriptExecutor) InitDriver.webDriver).executeScript(js, elem);
+        elem.click();
+    }
 
 }
 
